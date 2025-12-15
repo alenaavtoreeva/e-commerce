@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SwitchVerse Store — Игры и фигурки для Nintendo Switch</title>
+  <meta name="description" content="Интернет-магазин игр и аксессуаров для Nintendo Switch. Купить игры, фигурки amiibo с доставкой по России.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Modal для детальной информации о товаре -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Название товара</h3>
+        <button class="modal-close" id="modalClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-content">
+        <img id="modalImage" src="" alt="" class="modal-image">
+        <div class="modal-details">
+          <div class="product-category" id="modalCategory">Категория</div>
+          <div class="modal-price" id="modalPrice">0 ₽</div>
+          <p class="modal-description" id="modalDescription">Описание товара</p>
+          <ul class="modal-features" id="modalFeatures">
+            <!-- Особенности будут добавлены через JS -->
+          </ul>
+          <div class="modal-actions">
+            <button class="btn-add" id="modalAddToCart">
+              <i class="fas fa-cart-plus"></i> Добавить в корзину
+            </button>
+            <div class="product-actions" id="modalQuantityControls" style="display: none;">
+              <button class="btn-quantity" data-action="dec" id="modalDecBtn">−</button>
+              <div class="quantity-display" id="modalQuantity">0</div>
+              <button class="btn-quantity" data-action="inc" id="modalIncBtn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="logo-container">
+        <div class="logo">
+          <i class="fas fa-gamepad"></i>
+        </div>
+        <div class="logo-text">
+          <h1>SwitchVerse Store</h1>
+          <p>Официальный магазин игр и аксессуаров для Nintendo Switch</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="user-profile">
+          <i class="fas fa-user"></i>
+          <span>Гость</span>
+        </div>
+        <div class="cart-indicator" id="cartIndicator">
+          <i class="fas fa-shopping-cart cart-icon"></i>
+          <div class="cart-count">0</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="products-section">
+        <div class="section-header">
+          <h2>Популярные игры и аксессуары</h2>
+          <div style="color: var(--muted-text); font-size: 14px;">
+            <i class="fas fa-shipping-fast"></i> Бесплатная доставка от 5 000 ₽
+          </div>
+        </div>
+        
+        <div class="products-grid" id="products">
+          <!-- Товары будут добавлены через JS -->
+        </div>
+      </section>
+    </main>
+
+    <aside class="cart-sidebar" id="cart">
+      <h2><i class="fas fa-shopping-cart"></i> Ваша корзина</h2>
+      
+      <div class="cart-items" id="cartList">
+        <!-- Элементы корзины будут добавлены через JS -->
+        <div class="empty-cart">
+          <i class="fas fa-shopping-basket"></i>
+          <p>Ваша корзина пуста</p>
+          <p style="font-size: 13px; margin-top: 5px;">Добавьте товары из каталога</p>
+        </div>
+      </div>
+      
+      <div class="promo-section">
+        <div class="promo-input-container">
+          <input type="text" class="promo-input" id="promoInput" placeholder="Введите промокод">
+          <button class="btn-promo" id="applyPromo">Применить</button>
+        </div>
+        <div class="promo-message" id="promoMsg"></div>
+      </div>
+      
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Товаров:</span>
+          <span id="itemsCount">0</span>
+        </div>
+        <div class="summary-row">
+          <span>Подытог:</span>
+          <span id="subtotal">0 ₽</span>
+        </div>
+        <div class="summary-row">
+          <span>Скидка:</span>
+          <span id="discount" style="color: var(--success);">0 ₽</span>
+        </div>
+        <div class="summary-row">
+          <span>Доставка:</span>
+          <span id="shipping">0 ₽</span>
+        </div>
+        <div class="summary-row total">
+          <span>Итого:</span>
+          <span id="total">0 ₽</span>
+        </div>
+      </div>
+      
+      <div class="cart-actions">
+        <button class="btn-checkout" id="checkout">
+          <i class="fas fa-lock"></i> Оформить заказ
+        </button>
+        <button class="btn-clear" id="clearCart">
+          <i class="fas fa-trash-alt"></i> Очистить корзину
+        </button>
+      </div>
+    </aside>
+
+    <footer>
+      <div class="footer-info">
+        <p><strong>SwitchVerse Store</strong> — интернет-магазин лицензионных игр и аксессуаров для Nintendo Switch. Все товары официально поставляются в Россию.</p>
+        <div class="footer-note">
+          Данные сохраняются в <strong>localStorage</strong> вашего браузера. Корзина и применённые промокоды сохраняются между посещениями сайта.
+        </div>
+        <div class="footer-promo-list">
+          <span class="promo-badge">SAVE10 — 10% скидка</span>
+          <span class="promo-badge">SAVE50 — 50 ₽ скидка</span>
+          <span class="promo-badge">FREESHIP — бесплатная доставка</span>
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <p>© 2023 SwitchVerse Store</p>
+        <p style="font-size: 12px; margin-top: 5px;">Демонстрационный проект</p>
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="js/app.js"></script>
+</body>
+</html>
